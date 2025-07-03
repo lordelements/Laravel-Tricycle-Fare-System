@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Fare;
+use App\Models\User;
+use App\Models\Report;
+use App\Models\AuditTrail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -16,7 +19,29 @@ class FareTableController extends Controller
 
     public function index()
     {
-        return view('admin.index');
+        // Fetch total reports
+        $reportsCount = Report::count();
+        $totalUsers = User::count();
+        $totalUsersAdmin = User::where('usertype', 'admin')->count();
+        $totalUsersPassenger = User::where('usertype', 'passenger')->count();
+        $totalUsersDriver = User::where('usertype', 'driver')->count();
+
+        // Fetch pending and resolved reports
+        $pendingReportsCount = Report::where('status', 'pending')->count();
+        $resolvedReportsCount = Report::where('status', 'resolved')->count();
+
+        $totalUsersLogs = AuditTrail::count();
+
+        return view('admin.index', compact(
+            'reportsCount',
+            'totalUsers',
+            'totalUsersAdmin',
+            'totalUsersPassenger',
+            'totalUsersDriver',
+            'pendingReportsCount',
+            'resolvedReportsCount',
+            'totalUsersLogs'
+        ));
     }
 
     public function faretable()
@@ -38,8 +63,6 @@ class FareTableController extends Controller
 
         Fare::create($request->all());
         
-        // dd($request->all());
-
 
         return redirect()->route('admin.faretable')->with('success', 'Fare rate added successfully.');
     }

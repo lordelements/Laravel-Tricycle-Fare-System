@@ -1,4 +1,4 @@
-<div class="fixed top-4 right-4 z-50 space-y-3 w-80">
+<!-- <div class="fixed top-4 right-4 z-50 space-y-3 w-80">
     {{-- Success Message --}}
     @if(session('success'))
     <div class="flex items-center p-4 bg-green-50 border-l-4 border-green-500 rounded-lg shadow-sm animate-fade-in-up">
@@ -54,4 +54,47 @@
             transform: translateY(0);
         }
     }
-</style>
+</style> -->
+
+
+
+<!-- Include SweetAlert CSS and JS
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script> -->
+
+@if(session('success'))
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        swal({
+            icon: "success",
+            title: "Success!",
+            text: "{{ session('success') }}",
+            confirmButtonText: 'OK',
+        });
+        // Swal.fire({
+        //     icon: 'success',
+        //     title: 'Success!',
+        //     text: "{{ session('success') }}",
+        //     confirmButtonText: 'OK',
+        //     customClass: {
+        //         popup: 'swal2-popup',
+        //         confirmButton: 'swal2-confirm'
+        //     }
+        // });
+    });
+</script>
+@endif
+
+@if(session('error'))
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        swal({
+            icon: "error",
+            title: "Error!",
+            text: "{{ session('error') }}",
+            confirmButtonText: 'OK',
+        });
+    });
+</script>
+@endif
+

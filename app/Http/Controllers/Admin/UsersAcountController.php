@@ -29,7 +29,8 @@ class UsersAcountController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'usertype' => 'required|in:passenger,driver,admin'
+            'usertype' => 'required|in:passenger,driver,admin',
+            'status' => 'required|in:active,inactive'
         ]);
 
         // Create the user
@@ -37,7 +38,8 @@ class UsersAcountController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'usertype' => $validated['usertype']
+            'usertype' => $validated['usertype'],
+            'status' => $validated['status']
         ]);
 
         if ($user) {
@@ -50,7 +52,7 @@ class UsersAcountController extends Controller
 
     public function showUsers()
     {
-        $users = User::paginate(10);  // Fetch all users from the database
+        $users = User::paginate(5);  // Fetch all users from the database
         $userCount = $users->count(); // Get the total count of users
         return view('admin.registered_acounts.userstable', compact('users', 'userCount'));
     }
@@ -87,11 +89,13 @@ class UsersAcountController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8|confirmed',
             'usertype' => 'required|in:passenger,driver,admin',
+            'status' => 'required|in:active,inactive',
         ]);
 
         // Update user details
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
+        $user->status = $validatedData['status'];
 
         // Update password only if it's provided
         if (!empty($validatedData['password'])) {
@@ -103,4 +107,5 @@ class UsersAcountController extends Controller
         return Redirect()->back()->with('success', 'User  updated successfully!');
 
     }
+
 }

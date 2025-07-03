@@ -63,7 +63,7 @@ class TripRequestController extends Controller
             'estimated_price' => 'required|numeric',
         ]);
 
-        TripRequest::create([
+        $save = TripRequest::create([
             'user_id' => Auth::id(),
             'pickup_location' => $request->pickup,
             'destination' => $request->destination,
@@ -76,7 +76,14 @@ class TripRequestController extends Controller
             'timestamp' => now(),
         ]);
 
-        return redirect()->back()->with('success', 'Trip requested successfully.');
+        if ($save) {
+            return Redirect('/trip-request')->with('success', 'Trip requested successfully.');
+        }
+        else {
+            return Redirect('/trip-request')->withErrors(['error' => 'Failed to request trip.']);
+        }
+
+        
     }
 
 
@@ -117,9 +124,9 @@ class TripRequestController extends Controller
         $tripRequests->delete();
 
         if ($tripRequests) {
-            return redirect()->back()->with('success', 'Trip request deleted successfully.');
+            return Redirect('/dashboard/passenger')->with('success', 'Trip request deleted successfully.');
         } else {
-            return redirect()->back()->withErrors(['error' => 'Failed to delete trip request.']);
+            return Redirect('/dashboard/passenger')->withErrors(['error' => 'Failed to delete trip request.']);
         }
     }
 }

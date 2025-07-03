@@ -52,7 +52,6 @@
         </div>
 
         <div class="bg-white rounded shadow overflow-auto">
-
             <table class="min-w-full bg-white">
                 <thead class="bg-gray-800 text-white">
                     <tr>

@@ -14,6 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
          
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckUserType::class,
+            \App\Http\Middleware\LogLogoutActivity::class,
+            "prevent-back" => \App\Http\Middleware\PreventBack::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -3,10 +3,14 @@
 @section('content')
 
 <div class="w-full mt-12">
+    
     <!-- Header Section -->
-    <p class="text-2xl font-semibold text-gray-800 pb-6 flex items-center">
-        <i class="fas fa-users mr-3"></i> Registered Users Accounts
-    </p>
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-3xl font-semibold text-gray-800">
+            <i class="fas fa-users mr-3"></i> Registered Users Accounts
+        </h1>
+        <input id="myInput" class="py-2 px-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300" type="text" placeholder="Search by ID, Name, Address, Contact Number, etc.">
+    </div>
 
     <!-- Display the total number of users -->
     <div class="flex items-center justify-between mb-6">
@@ -25,10 +29,11 @@
                     <th class="py-3 px-4 text-left text-sm font-semibold">Email Address</th>
                     <th class="py-3 px-4 text-left text-sm font-semibold">Usertype</th>
                     <th class="py-3 px-4 text-left text-sm font-semibold">Created At</th>
+                    <th class="py-3 px-4 text-left text-sm font-semibold">Status</th>
                     <th class="py-3 px-4 text-left text-sm font-semibold">Actions</th>
                 </tr>
             </thead>
-            <tbody class="text-gray-700">
+            <tbody class="text-gray-700" id='myTable'>
 
                 @if($users && $users->count())
                 @foreach($users as $index => $user)
@@ -39,6 +44,7 @@
                     <td class="py-2 px-4">{{ $user->email }}</td>
                     <td class="py-2 px-4">{{ $user->usertype }}</td>
                     <td class="py-2 px-4">{{ $user->created_at->format('Y-m-d H:i') }}</td>
+                    <td class="py-2 px-4">{{ $user->status }}</td>
                     <td class="py-2 px-4">
                         <!-- Action Buttons -->
                         <a href="{{ route('admin.update_account', $user->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
@@ -66,5 +72,18 @@
 
     </div>
 </div>
+
+<!-- Search Function In Ajax -->
+<script>
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
 
 @endsection
