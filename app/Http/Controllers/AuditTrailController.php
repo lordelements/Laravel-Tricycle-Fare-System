@@ -16,15 +16,31 @@ class AuditTrailController extends Controller
         return view('admin.audit_trails.users_logs', compact('auditTrails'));
     }
 
-    public function deleteLogs(Request $request) {
-        $auditTrails = AuditTrail::findOrFail($request->input('user_id'));
-        $auditTrails->delete();
-        
-        if ($auditTrails) {
-            return Redirect::to('/dashboard/users/logs')->with('success', 'User logs activity deleted successfully!');
-        } else {
-            return Redirect::back()->withErrors(['error' => 'Failed to delete users logs activity.']);
-        }
-    }
+    // public function deleteLogs(Request $request)
+    // {
+    //     $auditTrails = AuditTrail::findOrFail($request->input('user_id'));
+    //     $auditTrails->delete();
 
+    //     if ($auditTrails) {
+    //         return Redirect::to('/dashboard/users/logs')->with('success', 'User logs activity deleted successfully!');
+    //     } else {
+    //         return Redirect::back()->withErrors(['error' => 'Failed to delete users logs activity.']);
+    //     }
+    // }
+
+    // In your LogController (or equivalent)
+    public function destroy($id)
+    {
+        // Find the log entry
+        $log = AuditTrail::find($id); 
+
+        if (!$log) {
+            return redirect()->back()->with('error', 'Log entry not found.');
+        }
+
+        $log->delete();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Log entry deleted successfully!');
+    }
 }

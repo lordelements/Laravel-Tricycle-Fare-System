@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Passenger;
 
 use App\Models\Fare;
+use App\Models\Report;
 use App\Models\TripRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,22 +16,24 @@ class TripRequestController extends Controller
      */
     public function __construct()
     {
-        /* The line `->middleware(['auth', 'passenger:passenger']);` in the
-        `TripRequestController` constructor is setting up middleware for the controller. */
-        // $this->middleware(['auth', 'passenger:passenger']);
         $this->middleware('auth');
     }
-
-
     
     public function index()
     {
+        $reportsCount = Report::count();
+        $tripRequestsCount = TripRequest::count();
+
+        return view('passenger.dashboard', compact('reportsCount', 'tripRequestsCount'));
+    }
+    
+    public function history()
+    {
         $tripRequests = TripRequest::where('user_id', Auth::id())
             ->orderBy('timestamp', 'desc')
-            ->get();
+            ->paginate(5);
 
-        // $tripRequests = TripRequest::latest()->paginate(5);
-        return view('passenger.dashboard', compact('tripRequests'));
+        return view('passenger.triprequest_history', compact('tripRequests'));
     }
     
     public function tripRequest()

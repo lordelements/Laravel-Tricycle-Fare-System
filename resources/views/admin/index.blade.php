@@ -2,92 +2,125 @@
 
 @section('content')
 
-<div class="flex items-center justify-between mb-6">
-    <h1 class="text-3xl font-semibold text-gray-800 dark:text-white">
-        <i class="fas fa-tachometer-alt mr-3"></i> Tricycle Faire System
+<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 p-4 sm:p-0">
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-800 dark:text-white mb-4 sm:mb-0">
+        <i class="fas fa-tachometer-alt mr-4 text-blue-600"></i> Tricycle Fare Management System
     </h1>
+    {{-- You can add a subtle current date/time or an action button here if needed --}}
+    <span class="text-lg text-gray-600 dark:text-gray-400 font-medium hidden md:block">
+        {{ now()->format('F j, Y') }}
+    </span>
 </div>
 
-<div class="flex items-center justify-between p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
-    <div>
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-white">Welcome, Admin!</h2>
-        <p class="text-gray-600 dark:text-gray-400">Here’s a quick overview of your dashboard.</p>
-    </div>
-    <div class="text-blue-500">
-        <i class="fas fa-tachometer-alt text-4xl"></i>
-    </div>
-</div>
-
-<div class="flex flex-wrap mt-6">
-    <div class="w-full lg:w-1/3 pr-0 lg:pr-2 mb-6 lg:mb-0">
-        <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
-            <i class="fas fa-users text-blue-500 text-3xl mb-3"></i> {{-- Added color to icon --}}
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white"><a href="{{ route('admin.registeredUsers')}}">Total Users</a></h3>
-            {{-- Assuming $totalUsers is passed from the controller --}}
-            <p class="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-2">{{ $totalUsers ?? 0 }}</p>
+<div class="relative overflow-hidden p-6 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl shadow-lg mb-8">
+    <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between">
+        <div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">Welcome Back, Admin!</h2>
+            <p class="text-blue-100 text-base sm:text-lg">Here’s a quick overview of your system's performance.</p>
         </div>
-    </div>
-    <div class="w-full lg:w-1/3 px-0 lg:px-2 mb-6 lg:mb-0">
-        <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
-            <i class="fas fa-user-clock text-yellow-500 text-3xl mb-3"></i> {{-- Example icon --}}
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white"><a href="{{ route('admin.showAuditTrails')}}">Total User Logs</a></h3> {{-- Changed "Users Logs" to "User Logs" for better grammar --}}
-            <p class="text-2xl font-bold text-yellow-600 dark:text-yellow-400 mt-2">{{ $totalUsersLogs ?? 0 }}</p> {{-- This is hardcoded; you'd fetch it similarly --}}
-        </div>
-    </div>
-    <div class="w-full lg:w-1/3 pl-0 lg:pl-2">
-        <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
-            <i class="fas fa-user-shield text-green-500 text-3xl mb-3"></i> {{-- Example icon --}}
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white"><a href="{{ route('admin.registeredUsers')}}">Total Admins</a></h3>
-            <p class="text-2xl font-bold text-green-600 dark:text-green-400 mt-2">{{ $totalUsersAdmin ?? 0 }}</p> {{-- This is hardcoded; you'd fetch it similarly --}}
+        <div class="mt-4 sm:mt-0 text-white text-opacity-75">
+            <i class="fas fa-chart-line text-5xl sm:text-6xl"></i>
         </div>
     </div>
 </div>
 
-<div class="flex flex-wrap mt-6">
-    <div class="w-full lg:w-1/3 pr-0 lg:pr-2 mb-6 lg:mb-0">
-        <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
-            <i class="fas fa-file-alt text-purple-500 text-3xl mb-3"></i> {{-- Example icon --}}
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white"><a href="{{ route('admin.reports.table')}}">Total Reports</a></h3>
-            {{-- This variable is now passed from the controller --}}
-            <p class="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-2">{{ $reportsCount ?? 0 }}</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+
+    {{-- Total Users Card --}}
+    <a href="{{ route('admin.registeredUsers') }}" class="block">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 p-6 flex items-center justify-between">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-1">Total Users</h3>
+                <p class="text-4xl font-bold text-blue-600 dark:text-blue-400">{{ $totalUsers ?? 0 }}</p>
+            </div>
+            <div class="p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
+                <i class="fas fa-users text-3xl text-blue-600 dark:text-blue-400"></i>
+            </div>
         </div>
-    </div>
-    <div class="w-full lg:w-1/3 px-0 lg:px-2 mb-6 lg:mb-0">
-        <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
-            <i class="fas fa-exclamation-triangle text-orange-500 text-3xl mb-3"></i> {{-- Example icon --}}
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Pending Reports</h3>
-            {{-- Assuming $pendingReportsCount is passed from the controller --}}
-            <p class="text-2xl font-bold text-yellow-600 dark:text-yellow-400 mt-2">{{ $pendingReportsCount ?? 0 }}</p>
+    </a>
+
+    {{-- Total Admins Card --}}
+    <a href="{{ route('admin.registeredUsers') }}" class="block"> {{-- Assuming registeredUsers route shows all users, including admins --}}
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 p-6 flex items-center justify-between">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-1">Total Admins</h3>
+                <p class="text-4xl font-bold text-green-600 dark:text-green-400">{{ $totalUsersAdmin ?? 0 }}</p>
+            </div>
+            <div class="p-3 bg-green-100 dark:bg-green-900 rounded-full">
+                <i class="fas fa-user-shield text-3xl text-green-600 dark:text-green-400"></i>
+            </div>
         </div>
-    </div>
-    <div class="w-full lg:w-1/3 pl-0 lg:pl-2">
-        <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
-            <i class="fas fa-check-circle text-teal-500 text-3xl mb-3"></i> {{-- Example icon --}}
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Resolved Reports</h3>
-            {{-- Assuming $resolvedReportsCount is passed from the controller --}}
-            <p class="text-2xl font-bold text-green-600 dark:text-green-400 mt-2">{{ $resolvedReportsCount ?? 0 }}</p>
+    </a>
+
+    {{-- Total User Activity Logs Card --}}
+    <a href="{{ route('admin.showAuditTrails') }}" class="block">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 p-6 flex items-center justify-between">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-1">User Activity Logs</h3>
+                <p class="text-4xl font-bold text-yellow-600 dark:text-yellow-400">{{ $totalUsersLogs ?? 0 }}</p>
+            </div>
+            <div class="p-3 bg-yellow-100 dark:bg-yellow-900 rounded-full">
+                <i class="fas fa-history text-3xl text-yellow-600 dark:text-yellow-400"></i>
+            </div>
         </div>
-    </div>
+    </a>
+
+    {{-- Total Reports Card --}}
+    <a href="{{ route('admin.reports.table') }}" class="block">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 p-6 flex items-center justify-between">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-1">Total Reports</h3>
+                <p class="text-4xl font-bold text-purple-600 dark:text-purple-400">{{ $tripRequestsCount ?? 0 }}</p>
+            </div>
+            <div class="p-3 bg-purple-100 dark:bg-purple-900 rounded-full">
+                <i class="fas fa-file-alt text-3xl text-purple-600 dark:text-purple-400"></i>
+            </div>
+        </div>
+    </a>
+
+    {{-- Pending Reports Card --}}
+    <a href="{{ route('admin.reports.table') }}?status=pending" class="block"> {{-- Link to reports table filtered by pending --}}
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 p-6 flex items-center justify-between">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-1">Pending Reports</h3>
+                <p class="text-4xl font-bold text-orange-600 dark:text-orange-400">{{ $pendingReportsCount ?? 0 }}</p>
+            </div>
+            <div class="p-3 bg-orange-100 dark:bg-orange-900 rounded-full">
+                <i class="fas fa-exclamation-circle text-3xl text-orange-600 dark:text-orange-400"></i> {{-- Changed icon for 'pending' --}}
+            </div>
+        </div>
+    </a>
+
+    {{-- Resolved Reports Card --}}
+    <a href="{{ route('admin.reports.table') }}?status=resolved" class="block"> {{-- Link to reports table filtered by resolved --}}
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 p-6 flex items-center justify-between">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-1">Resolved Reports</h3>
+                <p class="text-4xl font-bold text-teal-600 dark:text-teal-400">{{ $resolvedReportsCount ?? 0 }}</p>
+            </div>
+            <div class="p-3 bg-teal-100 dark:bg-teal-900 rounded-full">
+                <i class="fas fa-check-circle text-3xl text-teal-600 dark:text-teal-400"></i>
+            </div>
+        </div>
+    </a>
+
 </div>
 
-<div class="flex flex-wrap mt-6">
-    <div class="w-full lg:w-1/2 pr-0 lg:pr-2">
-        <p class="text-xl pb-3 flex items-center">
-            <i class="fas fa-plus mr-3"></i> Monthly Reports
-        </p>
-        <div class="p-6 bg-white">
-            <canvas id="chartOne" width="400" height="200"></canvas>
-        </div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
+            <i class="fas fa-chart-bar mr-3 text-blue-500"></i> Monthly Reports Overview
+        </h3>
+        <canvas id="chartOne" width="400" height="200"></canvas>
     </div>
-    <div class="w-full lg:w-1/2 pl-0 lg:pl-2 mt-12 lg:mt-0">
-        <p class="text-xl pb-3 flex items-center">
-            <i class="fas fa-check mr-3"></i> Resolved Reports
-        </p>
-        <div class="p-6 bg-white">
-            <canvas id="chartTwo" width="400" height="200"></canvas>
-        </div>
+
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
+            <i class="fas fa-chart-pie mr-3 text-green-500"></i> Report Status Distribution
+        </h3>
+        <canvas id="chartTwo" width="400" height="200"></canvas>
     </div>
 </div>
-
 
 @endsection

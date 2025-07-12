@@ -37,17 +37,17 @@ Route::middleware('auth')->group(function () {
 // Passenger Routes
 Route::middleware(['auth', 'verified', 'prevent-back', 'role:passenger'])->group(function () {
     Route::get('/dashboard/passenger', [TripRequestController::class, 'index'])->name('passenger.dashboard');
+    Route::get('/trip-request/history', [TripRequestController::class, 'history'])->name('triprequest_history');
     Route::get('/trip-request', [TripRequestController::class, 'tripRequest'])->name('passenger.triprequest');
     Route::get('/trip-request/history/{id}', [TripRequestController::class, 'show'])->name('passenger.triprequest_history');
     Route::post('/trip-request', [TripRequestController::class, 'store'])->name('trip.store');
     Route::delete('/delete/trip-request/{id}', [TripRequestController::class, 'destroy'])->name('passenger.trip.delete');
-
     
     // Reports feedback 
     Route::get('/dashboard/reports', [ReportsController::class, 'index'])->name('passenger.reports');
     Route::get('/dashboard/reports/passenger/{id}', [ReportsController::class, 'show'])->name('reports.report_detail');
     Route::post('/dashboard/reports', [ReportsController::class, 'store'])->name('store.reports');
-    Route::delete('/dashboard/reports/{id}', [ReportsController::class, 'destroy'])->name('delete.report');
+    Route::delete('/reports/{id}', [ReportsController::class, 'destroy'])->name('delete_report');
 });
 
 // Admin Routes
@@ -67,7 +67,9 @@ Route::middleware(['auth', 'verified', 'prevent-back', 'role:admin'])->group(fun
 
     // Audit Trail | Users logs
     Route::get('/dashboard/users/logs', [AuditTrailController::class, 'showAuditTrails'])->name('admin.showAuditTrails');
-    Route::delete('/dashboard/users/logs/{id}', [AuditTrailController::class, 'deleteLogs'])->name('delete_logs');
+    // Route::delete('/dashboard/users/logs/{id}', [AuditTrailController::class, 'deleteLogs'])->name('delete_logs');
+    Route::delete('/admin/logs/{id}', [AuditTrailController::class, 'destroy'])->name('delete_logs');
+
 
     // Admin Reports
     Route::get('/dashboard/users_reports', [AdminReportsController::class, 'index'])->name('admin.reports.table');

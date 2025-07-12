@@ -66,7 +66,7 @@ class UsersAcountController extends Controller
         // Auth::logout();
 
         if ($users) {
-            return Redirect::to('/Dashboard/users')->with('success', 'User deleted successfully!');
+            return Redirect::to('/dashboard/users')->with('success', 'User deleted successfully!');
         } else {
             return Redirect::back()->withErrors(['error' => 'Failed to delete users account.']);
         }

@@ -6,106 +6,65 @@
         </h2>
     </x-slot>
 
-    <div
-        class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __('Welcome!, :name', ['name' => Auth::user()->name]) }}
+    <div class="py-12 px-4 sm:px-6 lg:px-8"> {{-- Added consistent responsive padding --}}
+        <div class="max-w-7xl mx-auto"> {{-- Max width for larger screens --}}
+            <div class="relative overflow-hidden bg-gradient-to-br from-indigo-600 to-purple-800 text-white rounded-xl shadow-2xl p-8 mb-8 animate-fade-in">
+                {{-- Subtle background pattern for visual interest --}}
+                <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTIwMCAxMjAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik0wIDBoMTIwMHYxMjAwSDBWMHoiLz48cGF0aCBmaWxsPSIjYmNkMWQ0IiBkPSJNMCA1OTguNzQ2YzIuNzI1LTIuNDQxIDUuNDUtNC44ODMgOC4xNzYtNy4zMjRjMjIuNDg1LTIwLjE2NiA0NC45Ny00MC4zMzMgNjcuNDU1LTYwLjQ5OWM0NC45Ny00MC4zMzMgODkuOTQtODAuNjY1IDEzNC45MS0xMjAuOTk4YzQ0Ljk3LTQwLjMzMyA4OS45NC04MC42NjUgMTM0LjkxLTEyMC45OThjNDQuOTctNDAuMzMzIDg5Ljk0LTgwLjY2NSAxMzQuOTEtMTIwLjk5OGM0NC45Ny00MC4zMzMgODkuOTQtODAuNjY1IDEzNC45MS0xMjAuOTk4YzQ0Ljk3LTQwLjMzMyA4OS45NC04MC42NjUgMTM0LjkxLTEyMC45OThjNDQuOTctNDAuMzMzIDg5Ljk0LTgwLjY2NSAxMzQuOTEtMTIwLjk5OGM0NC45Ny00MC4zMzMgODkuOTQtODAuNjY1IDEzNC45MS0xMjAuOTk4YzQ0Ljk3LTQwLjMzMyA4OS45NC04MC42NjUgMTM0LjkxLTEyMC45OThjNDQuOTctNDAuMzMzIDg5Ljk0LTgwLjY2NSAxMzQuOTEtMTIwLjk5OGM0NC45Ny00MC4zMzMgODkuOTQtODAuNjY1IDEzNC45MS0xMjAuOTk4YzQuMDQ3LTMuNjMyIDguMDk0LTcuMjY1IDEyLjE0MS0xMC44OTdWMjQ2LjI2NGMwIDY0LjcyNiAwIDEyOS40NTIgMCAxOTQuMTc4YzAgNjQuNzI2IDAgMTI5LjQ1MiAwIDE5NC4xNzhjMCA2NC43MjYgMCAxMjkuNDUyIDAgMTk0LjE3OGMwIDY0LjcyNiAwIDEyOS40NTIgMCAxOTQuMTc4YzAgNjQuNzI2IDAgMTI5LjQ1MiAwIDE5NC4xNzhjMCA2NC43MjYgMCAxMjkuNDUyIDAgMTk0LjE3OGMwIDcuMjY1IDAgMTQuNTMtMCAyMS43OTVjLTIuNzI1IDIuNDQxLTUuNDUgNC44ODMtOC4xNzYgNy4zMjRjLTIyLjQ4NSAyMC4xNjYtNDQuOTcgNDAuMzMzLTY3LjQ1NSA2MC40OTljLTQ0Ljk3IDQwLjMzMy04OS45NCA4MC42NjUtMTM0LjkxIDEyMC45OThjLTQ0Ljk3IDQwLjMzMy04OS45NCA4MC42NjUtMTM0LjkxIDEyMC45OThjLTQ0Ljk3IDQwLjMzMy04OS45NCA4MC42NjUtMTM0LjkxIDEyMC45OThjLTQ0Ljk3IDQwLjMzMy04OS45NCA4MC42NjUtMTM0LjkxIDEyMC45OThjLTQ0Ljk3IDQwLjMzMy04OS45NCA4MC42NjUtMTM0LjkxIDEyMC45OThjLTQ0Ljk3IDQwLjMzMy04OS45NCA4MC42NjUtMTM0LjkxIDEyMC45OThjLTQ0Ljk3IDQwLjMzMy04OS45NCA4MC42NjUtMTM0LjkxIDEyMC45OThjLTQ0Ljk3IDQwLjMzMy04OS45NCA4MC42NjUtMTM0LjkxIDEyMC45OThjLTQuMDQ3IDMuNjMyLTguMDk0IDcuMjY1LTEyLjE0MSAxMC44OTdWMTA2NS40MjZjMCAtNjQuNzI2IDAtMTI5LjQ1MiAwLTE5NC4xNzhjMC02NC43MjYgMC0xMjkuNDUyIDAtMTk0LjE3OGMwLTY0LjcyNiAwLTEyOS40NTIgMC0xOTQuMTc4Yy0uMDAxLTY0LjcyNiAwLTEyOS40NTIgMC0xOTQuMTc4Yy0uMDAxLTY0LjcyNiAwLTEyOS40NTIgMC0xOTQuMTc4Yy0uMDAxLTcuMjY2IDAtMTQuNTMxIDAtMjEuNzk3eiIvPjwvc3ZnPg=='); background-size: cover; background-position: center;"></div>
+                <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl sm:text-4xl font-extrabold mb-2 leading-tight">
+                            {{ __('Hello, :name!', ['name' => Auth::user()->name]) }}
+                        </h1>
+                        <p class="text-indigo-100 text-base sm:text-lg opacity-90">
+                            {{ __('Welcome to your personalized passenger dashboard. Here’s a quick overview of your activities.') }}
+                        </p>
+                    </div>
+                    <div class="mt-6 sm:mt-0 text-white text-opacity-80">
+                        <i class="fas fa-user-circle text-6xl sm:text-7xl"></i>
+                    </div>
                 </div>
+            </div>
+
+            
+        <!-- Key Metrics Section -->
+        <div class="mb-8">
+            <h3 class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white flex items-center mb-6">
+                <i class="fas fa-tachometer-alt mr-3 text-blue-600"></i> {{ __('Your Activity Overview') }}
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {{-- Total Reports Card --}}
+                <a href="{{ route('passenger.reports') }}" class="block transform hover:scale-103 transition-transform duration-200 ease-in-out">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg ring-1 ring-gray-100 dark:ring-gray-700 p-6 flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-1">Your Total Reports</h3>
+                            <p class="text-4xl font-bold text-purple-600 dark:text-purple-400">{{ $reportsCount ?? 0 }}</p>
+                        </div>
+                        <div class="p-4 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
+                            <i class="fas fa-file-alt text-3xl text-purple-600 dark:text-purple-400"></i>
+                        </div>
+                    </div>
+                </a>
+
+                {{-- Total Trip Requests Card --}}
+                <a href="{{ route('triprequest_history') }}" class="block transform hover:scale-103 transition-transform duration-200 ease-in-out">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg ring-1 ring-gray-100 dark:ring-gray-700 p-6 flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-1">Your Total Trip Requests</h3>
+                            <p class="text-4xl font-bold text-blue-600 dark:text-blue-400">{{ $tripRequestsCount ?? 0 }}</p>
+                        </div>
+                        <div class="p-4 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+                            <i class="fas fa-route text-3xl text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                    </div>
+                </a>
 
             </div>
         </div>
-    </div>
 
-
-    <!-- Responsive wrapper for Trip History Table -->
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            {{-- Updated main container for the trip requests history table --}}
-            <div class="overflow-x-auto shadow-md rounded-lg">
-                {{-- Header section for the trip requests table, matching the reports table header --}}
-                <div class="p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 rounded-t-lg">
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ __('Trip Requests History') }}</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">
-                        {{ __('Here you can view and manage your past trip requests.') }}
-                    </p>
-                </div>
-
-                {{-- Table container --}}
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">{{ __('#No Trip') }}</th>
-                            <th scope="col" class="px-6 py-3">{{ __('Passenger Current Location') }}</th>
-                            <th scope="col" class="px-6 py-3">{{ __('Pickup Destination') }}</th>
-                            <th scope="col" class="px-6 py-3">{{ __('Fare Price') }}</th>
-                            <th scope="col" class="px-6 py-3">{{ __('Created At') }}</th>
-                            <th scope="col" class="px-6 py-3">{{ __('Action') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                        @forelse ($tripRequests as $index => $trip)
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $index + 1 }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $trip->pickup_location }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $trip->destination }}</td>
-                            {{-- Formatted fare price with PHP currency --}}
-                            <td class="px-6 py-4 whitespace-nowrap">₱{{ number_format($trip->estimated_price, 2) }}</td>
-                            {{-- Formatted timestamp to match reports table --}}
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $trip->timestamp }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="" class="inline-flex items-center px-4 py-1 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md"
-                                    onclick="event.preventDefault(); document.getElementById('delete-form-{{ $trip->id }}').submit();">Delete</a>
-
-                                <form id="delete-form-{{ $trip->id }}" action="{{ route('passenger.trip.delete', $trip->id) }}" method="POST" style="display: none;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="hidden" name="user_id" value="{{ $trip->id }}">
-                                </form>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            {{-- Changed colspan to 6 as one column was removed --}}
-                            <td colspan="6" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">{{ __('No trip requests found.') }}</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 
-
-    <!-- Leaflet CDN -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-
-    @if(session('success'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                icon: "success",
-                title: "Good job!",
-                text: "{{ session('success') }}",
-                confirmButtonText: 'OK',
-            });
-        });
-    </script>
-    @endif
-
-    @if(session('error'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                icon: "error",
-                title: "Error!",
-                text: "{{ session('error') }}",
-                confirmButtonText: 'OK',
-            });
-        });
-    </script>
-    @endif
 </x-app-layout>

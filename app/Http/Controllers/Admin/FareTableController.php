@@ -29,7 +29,6 @@ class FareTableController extends Controller
         // Fetch pending and resolved reports
         $pendingReportsCount = Report::where('status', 'pending')->count();
         $resolvedReportsCount = Report::where('status', 'resolved')->count();
-
         $totalUsersLogs = AuditTrail::count();
 
         return view('admin.index', compact(

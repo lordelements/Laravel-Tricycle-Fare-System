@@ -6,6 +6,7 @@ use App\Models\Report;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ReportsController extends Controller
 {
@@ -30,6 +31,7 @@ class ReportsController extends Controller
             'user_id' => Auth::id(),
             'title' => $request->title,
             'description' => $request->description,
+            'status' => 'pending',
         ]);
 
         return redirect()->back()->with('success', 'Report submitted successfully!');
@@ -56,12 +58,14 @@ class ReportsController extends Controller
     public function destroy(Request $request, $id)
     {
         $report = Report::findOrFail($id);
+        
         if ($report->user_id !== Auth::id()) {
             return redirect()->back()->with('error', 'Unauthorized action.');
         }
 
         $report->delete();
-        return redirect()->back()->with('success', 'Report deleted successfully!');
+        return Redirect('/dashboard/reports')->with('success', 'Report deleted successfully!');
+
     }
 
 }

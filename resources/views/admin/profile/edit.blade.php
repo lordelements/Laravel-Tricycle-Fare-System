@@ -2,37 +2,20 @@
 
 @section('content')
 
-<!-- Header Section -->
-<div name="header">
-    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight p-6">
-        {{ __('Administrator Profile') }}
-    </h2>
+<div class="w-full mt-12 px-4 sm:px-6 lg:px-8"> {{-- Added consistent responsive padding and top margin --}}
+    <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white flex items-center mb-6"> {{-- Enhanced header styling --}}
+        <i class="fas fa-user-shield mr-3 text-indigo-600"></i> {{ __('Administrator Profile') }}
+    </h1>
 </div>
 
-<!-- Main Content Section -->
-<div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+<div class="py-6 px-4 sm:px-6 lg:px-8"> {{-- Adjusted padding for main content area --}}
+    <div class="max-w-7xl mx-auto space-y-8"> {{-- Increased space-y for more separation between sections --}}
 
-        <!-- Update Profile Information Form -->
-        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-            <div class="max-w-xl">
-                @include('admin.profile.partials.update-profile-information-form')
-            </div>
-        </div>
+        @include('admin.profile.partials.update-profile-information-form')
 
-        <!-- Update Password Form -->
-        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-            <div class="max-w-xl">
-                @include('admin.profile.partials.update-password-form')
-            </div>
-        </div>
+        @include('admin.profile.partials.update-password-form')
 
-        <!-- Delete User Form -->
-        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-            <div class="max-w-xl">
-                @include('admin.profile.partials.delete-user-form')
-            </div>
-        </div>
+        @include('admin.profile.partials.delete-user-form')
 
     </div>
 </div>
